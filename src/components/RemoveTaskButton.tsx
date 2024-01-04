@@ -1,4 +1,5 @@
 import { Task } from "../types";
+import { getTasks, removeTask, saveTasks } from "./taskHelpers";
 
 type Props = {
 	task: Task;
@@ -6,14 +7,9 @@ type Props = {
 
 export const RemoveTaskButton = ({ task }: Props) => {
 	const onClick = () => {
-		const serializedTasks = localStorage.getItem("tasks");
-		const tasks = serializedTasks
-			? (JSON.parse(serializedTasks) as Task[])
-			: [];
-		const filteredTasks = tasks.filter(
-			({ content }) => content !== task.content
-		);
-		localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+		const tasks = getTasks();
+		const filteredTasks = removeTask(task, tasks);
+		saveTasks(filteredTasks);
 	};
 
 	return <button onClick={onClick}>X</button>;

@@ -1,1 +1,1 @@
-export type Task = { content: string };
+export type Task = { content: string; completed: boolean };

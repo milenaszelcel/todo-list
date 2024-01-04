@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 import { AddTaskForm } from "./components/AddTaskForm";
 import { TaskList } from "./components/TaskList";
 import { Task } from "./types";
+import { getTasks } from "./components/taskHelpers";
 
 function App() {
 	const [tasks, setTasks] = useState<Task[]>([]);
 
 	const refreshTasks = () => {
-		const serializedTasks = localStorage.getItem("tasks");
-		const tasks = serializedTasks
-			? (JSON.parse(serializedTasks) as Task[])
-			: [];
+		const tasks = getTasks();
 		setTasks(tasks);
 	};
 
-	useEffect(refreshTasks);
+	useEffect(refreshTasks, []);
 
 	return (
 		<div className="App">

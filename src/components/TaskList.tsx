@@ -1,5 +1,5 @@
 import { Task } from "../types";
-import { RemoveTaskButton } from "./RemoveTaskButton";
+import { TaskListItem } from "./TaskListItem";
 
 type Props = {
 	tasks: Task[];
@@ -14,7 +14,7 @@ export const TaskList = ({ tasks }: Props) => {
 		<ul>
 			{tasks.map((task) => (
 				<li>
-					{task.content} <RemoveTaskButton task={task} />
+					<TaskListItem task={task} />
 				</li>
 			))}
 		</ul>
