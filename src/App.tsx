@@ -17,7 +17,7 @@ function App() {
 	return (
 		<div className="App">
 			<AddTaskForm onTaskAdded={refreshTasks} />
-			<TaskList tasks={tasks} />
+			<TaskList tasks={tasks} onTaskChange={refreshTasks} />
 		</div>
 	);
 }
