@@ -1,21 +1,18 @@
+import { useContext } from "react";
+import { TaskContext } from "../contexts/TaskContext";
 import { Task } from "../types";
-import { getTasks, saveTasks, updateTask } from "./taskHelpers";
 
 type Props = {
 	task: Task;
-	onTaskChange: () => void;
 };
 
-export const CompleteTaskButton = ({ task, onTaskChange }: Props) => {
+export const CompleteTaskButton = ({ task }: Props) => {
+	const { updateTask } = useContext(TaskContext);
 	const onClick = () => {
-		const tasks = getTasks();
-		const completedTask = {
+		updateTask?.({
 			...task,
 			completed: true,
-		};
-		const filteredTasks = updateTask(completedTask, tasks);
-		saveTasks(filteredTasks);
-		onTaskChange();
+		});
 	};
 
 	return !task.completed ? <button onClick={onClick}>Gotowe</button> : null;

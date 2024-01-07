@@ -1,12 +1,9 @@
-import { Task } from "../types";
+import { useContext } from "react";
 import { TaskListItem } from "./TaskListItem";
+import { TaskContext } from "../contexts/TaskContext";
 
-type Props = {
-	tasks: Task[];
-	onTaskChange: () => void;
-};
-
-export const TaskList = ({ tasks, onTaskChange }: Props) => {
+export const TaskList = () => {
+	const { tasks } = useContext(TaskContext);
 	if (!tasks.length) {
 		return <div>Nie ma zadań</div>;
 	}
@@ -15,7 +12,7 @@ export const TaskList = ({ tasks, onTaskChange }: Props) => {
 		<ul>
 			{tasks.map((task) => (
 				<li>
-					<TaskListItem task={task} tasks={tasks} onTaskChange={onTaskChange} />
+					<TaskListItem task={task} />
 				</li>
 			))}
 		</ul>

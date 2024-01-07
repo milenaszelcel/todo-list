@@ -1,26 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Task } from "../types";
 import { RemoveTaskButton } from "./RemoveTaskButton";
 import { CompleteTaskButton } from "./CompleteTaskButton";
 import { EditTaskButton } from "./EditTask";
 import { SaveTaskButton } from "./SaveTaskButton";
-import { getTasks, replaceTask, saveTasks, updateTask } from "./taskHelpers";
 import { Field, Form, Formik } from "formik";
+import { TaskContext } from "../contexts/TaskContext";
 
 type Props = {
 	task: Task;
-	tasks: Task[];
-	onTaskChange: () => void;
 };
 
-export const TaskListItem = ({ task, onTaskChange }: Props) => {
+export const TaskListItem = ({ task }: Props) => {
 	const [isOpen, setOpen] = useState(false);
+	const { updateTask } = useContext(TaskContext);
 
 	const onSubmit = (values: Task) => {
-		const tasks = getTasks();
-		const filteredTasks = updateTask(values, tasks);
-		saveTasks(filteredTasks);
-		onTaskChange();
+		updateTask?.(values);
 		setOpen(false);
 	};
 	return (
@@ -35,8 +31,8 @@ export const TaskListItem = ({ task, onTaskChange }: Props) => {
 			) : (
 				<div>
 					{task.content}
-					<RemoveTaskButton task={task} onTaskChange={onTaskChange} />
-					<CompleteTaskButton task={task} onTaskChange={onTaskChange} />
+					<RemoveTaskButton task={task} />
+					<CompleteTaskButton task={task} />
 					<EditTaskButton onClick={() => setOpen(true)} />
 				</div>
 			)}

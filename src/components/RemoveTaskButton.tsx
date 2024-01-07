@@ -1,17 +1,15 @@
+import { useContext } from "react";
 import { Task } from "../types";
-import { getTasks, removeTask, saveTasks } from "./taskHelpers";
+import { TaskContext } from "../contexts/TaskContext";
 
 type Props = {
 	task: Task;
-	onTaskChange: () => void;
 };
 
-export const RemoveTaskButton = ({ task, onTaskChange }: Props) => {
+export const RemoveTaskButton = ({ task }: Props) => {
+	const { removeTask } = useContext(TaskContext);
 	const onClick = () => {
-		const tasks = getTasks();
-		const filteredTasks = removeTask(task, tasks);
-		saveTasks(filteredTasks);
-		onTaskChange();
+		removeTask?.(task);
 	};
 
 	return <button onClick={onClick}>X</button>;

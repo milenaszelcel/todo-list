@@ -1,13 +1,13 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Task } from "../types";
-import { getTasks, saveTasks } from "./taskHelpers";
-import { v4 as uuid } from "uuid";
+import { createTaskSchema } from "../schemas";
+import { useContext } from "react";
+import { TaskContext } from "../contexts/TaskContext";
 
-export const AddTaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
+export const AddTaskForm = () => {
+	const { addTask } = useContext(TaskContext);
 	const onSubmit = (values: Omit<Task, "id">) => {
-		const tasks = getTasks();
-		saveTasks([...tasks, { ...values, id: uuid() }]);
-		onTaskAdded();
+		addTask?.(values);
 	};
 
 	return (
@@ -17,11 +17,15 @@ export const AddTaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
 				completed: false,
 			}}
 			onSubmit={onSubmit}
+			validationSchema={createTaskSchema}
 		>
-			<Form>
-				<Field type="text" name="content" as="textarea" />
-				<button type="submit">Dodaj</button>
-			</Form>
+			{({ errors }) => (
+				<Form>
+					<Field type="text" name="content" as="textarea" />
+					<ErrorMessage name="content" />
+					<button type="submit">Dodaj</button>
+				</Form>
+			)}
 		</Formik>
 	);
 };
