@@ -1,4 +1,26 @@
 .title {
 	font-family: Inter;
 	font-size: 40px;
+	text-align: center;
+	padding: 20px;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 200px;
+}
+
+body {
+	background-color: #f8ecff;
+	font-family: Inter;
+	font-size: 20px;
+}
+
+.column {
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }

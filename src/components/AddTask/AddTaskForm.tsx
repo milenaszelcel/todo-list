@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { TaskContext } from "../../contexts/TaskContext";
 import styles from "./AddTask.module.scss";
 import Icon from "@mdi/react";
-import { mdiClose } from "@mdi/js";
+import { mdiPlus } from "@mdi/js";
 
 export const AddTaskForm = () => {
 	const { addTask } = useContext(TaskContext);
@@ -23,19 +23,12 @@ export const AddTaskForm = () => {
 			validationSchema={createTaskSchema}
 		>
 			{({ errors }) => (
-				<Form>
-					<div className={styles.form}>
-						<Field
-							type="text"
-							name="content"
-							as="textarea"
-							className={styles.textarea}
-						/>
+				<Form className={styles.form}>
+					<Field type="text" name="content" className={styles.textarea} />
 
-						<button type="submit" className={styles.button}>
-							<Icon path={mdiClose} size={1} />
-						</button>
-					</div>
+					<button type="submit" className={styles.button}>
+						<Icon path={mdiPlus} size={1.5} color={"white"} spin />
+					</button>
 					<ErrorMessage name="content" />
 				</Form>
 			)}

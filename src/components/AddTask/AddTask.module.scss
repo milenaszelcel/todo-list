@@ -1,18 +1,28 @@
 .textarea {
 	border-radius: 100px 0px 0px 100px;
-	border-top: 2px solid #b91ed3;
-	border-bottom: 2px solid #b91ed3;
-	border-left: 2px solid #b91ed3;
+	border: 2px solid #b91ed3;
 	background: #fff;
-	text-align: center;
+	padding: 0px 10px;
+	width: 100%;
+	font-size: 24px;
+	font-family: Inter;
+}
+
+.textarea:focus {
+	outline: 0;
+	border: 2px solid #8c00a1;
 }
 
 .button {
 	border-radius: 0px 100px 100px 0px;
-	border: 2px solid #b91ed3;
+	border-top: 2px solid #b91ed3;
+	border-bottom: 2px solid #b91ed3;
+	border-right: 2px solid #b91ed3;
+	border-left: none;
 	background: #bb62c9;
 }
 
 .form {
 	display: flex;
+	width: 100%;
 }
