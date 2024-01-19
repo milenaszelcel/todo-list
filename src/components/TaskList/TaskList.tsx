@@ -11,10 +11,10 @@ export const TaskList = () => {
 	}
 
 	return (
-		<div>
+		<>
 			{notCompletedTasks.map((task) => (
 				<TaskListItem task={task} />
 			))}
-		</div>
+		</>
 	);
 };

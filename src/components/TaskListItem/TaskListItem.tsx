@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import { Task } from "../../types";
 import { RemoveTaskButton } from "../RemoveTaskButton/RemoveTaskButton";
-import { CompleteTaskButton } from "../CompleteTaskButton/CompleteTaskButton";
+import { ChangeTaskStatusButton } from "../CompleteTaskButton/ChangeTaskStatusButton";
 import { EditTaskButton } from "../EditTaskButton/EditTask";
 import { SaveTaskButton } from "../SaveTaskButton/SaveTaskButton";
 import { Field, Form, Formik } from "formik";
 import { TaskContext } from "../../contexts/TaskContext";
-import Icon from "@mdi/react";
-import { mdiArrowLeftBoldOutline } from "@mdi/js";
-
 import styles from "./TaskListItem.module.scss";
+import classNames from "classnames";
 
 type Props = {
 	task: Task;
@@ -23,6 +21,7 @@ export const TaskListItem = ({ task }: Props) => {
 		updateTask?.(values);
 		setOpen(false);
 	};
+
 	return (
 		<div>
 			{isOpen ? (
@@ -34,14 +33,22 @@ export const TaskListItem = ({ task }: Props) => {
 						</Form>
 					</Formik>
 				</div>
+			) : task.completed ? (
+				<div className={classNames(styles.task, styles.completedTask)}>
+					<EditTaskButton onClick={() => setOpen(true)} />
+					{task.content}
+					<div className={styles.buttonsContainer}>
+						<RemoveTaskButton task={task} />
+						<ChangeTaskStatusButton task={task} />
+					</div>
+				</div>
 			) : (
 				<div className={styles.task}>
 					<EditTaskButton onClick={() => setOpen(true)} />
 					{task.content}
-					<div className={styles.removeAndEditContainer}>
+					<div className={styles.buttonsContainer}>
 						<RemoveTaskButton task={task} />
-						<Icon path={mdiArrowLeftBoldOutline} size={1.5} color={"#b91ed3"} />
-						<CompleteTaskButton task={task} />
+						<ChangeTaskStatusButton task={task} />
 					</div>
 				</div>
 			)}

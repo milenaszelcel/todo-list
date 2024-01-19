@@ -27,7 +27,7 @@ export const AddTaskForm = () => {
 					<Field type="text" name="content" className={styles.textarea} />
 
 					<button type="submit" className={styles.button}>
-						<Icon path={mdiPlus} size={1.5} color={"white"} spin />
+						<Icon path={mdiPlus} size={1.5} color={"white"} />
 					</button>
 					<ErrorMessage name="content" />
 				</Form>

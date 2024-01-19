@@ -3,24 +3,29 @@ import { TaskContext } from "../../contexts/TaskContext";
 import { Task } from "../../types";
 import Icon from "@mdi/react";
 import { mdiCheckOutline } from "@mdi/js";
-import styles from "./CompleteTaskButton.module.scss";
+import styles from "./ChangeTaskStatusButton.module.scss";
+import { mdiArrowLeftBoldOutline } from "@mdi/js";
 
 type Props = {
 	task: Task;
 };
 
-export const CompleteTaskButton = ({ task }: Props) => {
+export const ChangeTaskStatusButton = ({ task }: Props) => {
 	const { updateTask } = useContext(TaskContext);
 	const onClick = () => {
 		updateTask?.({
 			...task,
-			completed: true,
+			completed: !task.completed,
 		});
 	};
 
-	return !task.completed ? (
+	return (
 		<button onClick={onClick} className={styles.completeButton}>
-			<Icon path={mdiCheckOutline} size={1.5} color={"#b91ed3"} />
+			{!task.completed ? (
+				<Icon path={mdiCheckOutline} size={1.5} color={"#b91ed3"} />
+			) : (
+				<Icon path={mdiArrowLeftBoldOutline} size={1.5} color={"#b91ed3"} />
+			)}
 		</button>
-	) : null;
+	);
 };

@@ -10,7 +10,7 @@
 	align-items: center;
 }
 
-.removeAndEditContainer {
+.buttonsContainer {
 	display: flex;
 	flex-direction: column;
 }
@@ -27,4 +27,9 @@
 .form {
 	width: 100%;
 	display: flex;
+}
+
+.completedTask {
+	text-decoration: line-through;
+	opacity: 0.6;
 }

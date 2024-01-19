@@ -6,10 +6,10 @@ export const CompletetTasksList = () => {
 	const { tasks } = useContext(TaskContext);
 	const completedTasks = tasks.filter((task) => task.completed);
 	return (
-		<div>
+		<>
 			{completedTasks.map((task) => (
 				<TaskListItem task={task} />
 			))}
-		</div>
+		</>
 	);
 };
